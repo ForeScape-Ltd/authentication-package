@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/felixgiftinfo/authentication-pkg/token"
+	"github.com/ForeScape-Ltd/authentication-package/token"
 )
 
 func TODO(tokenSecretKey, refreshTokenSecretKey string, tokenDuration, refreshTokenDuration time.Duration) (token.Maker, error) {

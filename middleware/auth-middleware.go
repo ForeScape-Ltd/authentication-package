@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/felixgiftinfo/authentication-pkg/rest"
-	"github.com/felixgiftinfo/authentication-pkg/token"
+	"github.com/ForeScape-Ltd/authentication-package/rest"
+	"github.com/ForeScape-Ltd/authentication-package/token"
 
 	"github.com/gin-gonic/gin"
 )

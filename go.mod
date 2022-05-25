@@ -1,4 +1,4 @@
-module github.com/felixgiftinfo/authentication-pkg
+module github.com/ForeScape-Ltd/authentication-package
 
 go 1.18
 

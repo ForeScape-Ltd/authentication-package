@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/felixgiftinfo/authentication-pkg/util"
+	"github.com/ForeScape-Ltd/authentication-package/util"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/stretchr/testify/require"
