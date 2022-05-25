@@ -25,17 +25,18 @@ type JWTMaker struct {
 	tokenSecretKey        string
 	refreshKokenSecretKey string
 	duration              time.Duration
+	refreshDuration       time.Duration
 }
 
 // NewJWTMaker creates a new JWTMaker
-func NewJWTMaker(tokenSecretKey string, refreshTokenSecretKey string, duration time.Duration) (Maker, error) {
+func NewJWTMaker(tokenSecretKey string, refreshTokenSecretKey string, duration time.Duration, refreshDuration time.Duration) (Maker, error) {
 	if len(tokenSecretKey) < minSecretKeySize {
 		return nil, fmt.Errorf("Invalid key size: must be at least %d characters", minSecretKeySize)
 	}
 	if len(refreshTokenSecretKey) < minSecretKeySize {
 		return nil, fmt.Errorf("Invalid key size: must be at least %d characters", minSecretKeySize)
 	}
-	return &JWTMaker{tokenSecretKey, refreshTokenSecretKey, duration}, nil
+	return &JWTMaker{tokenSecretKey, refreshTokenSecretKey, duration, refreshDuration}, nil
 }
 
 // CreateToken creates a new token for a specific username and duration
