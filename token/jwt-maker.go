@@ -12,8 +12,8 @@ const minSecretKeySize = 32
 
 type Maker interface {
 	// CreateToken creates a new token for a specific username and duration
-	CreateToken(email string) (string, *Payload, error)
-	CreateRefeshToken(email string) (string, *Payload, error)
+	CreateToken(userId, email string) (string, *Payload, error)
+	CreateRefeshToken(userId, email string) (string, *Payload, error)
 
 	// VerifyToken checks if the token is valid or not
 	VerifyToken(token string) (*Payload, error)
@@ -40,9 +40,9 @@ func NewJWTMaker(tokenSecretKey string, refreshTokenSecretKey string, duration t
 }
 
 // CreateToken creates a new token for a specific username and duration
-func (maker *JWTMaker) CreateToken(email string) (string, *Payload, error) {
+func (maker *JWTMaker) CreateToken(userId, email string) (string, *Payload, error) {
 
-	payload, err := NewPayload(email, maker.duration)
+	payload, err := NewPayload(userId, email, maker.duration)
 	if err != nil {
 		return "", payload, err
 	}
@@ -53,9 +53,9 @@ func (maker *JWTMaker) CreateToken(email string) (string, *Payload, error) {
 }
 
 // CreateToken creates a new token for a specific username and duration
-func (maker *JWTMaker) CreateRefeshToken(email string) (string, *Payload, error) {
+func (maker *JWTMaker) CreateRefeshToken(userId, email string) (string, *Payload, error) {
 
-	payload, err := NewPayload(email, maker.duration)
+	payload, err := NewPayload(userId, email, maker.duration)
 	if err != nil {
 		return "", payload, err
 	}

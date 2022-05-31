@@ -22,7 +22,7 @@ func main() {
 		fmt.Println(err.Error())
 	}
 
-	tok, pay, err := token.CreateToken("admin@gmail.com")
+	tok, pay, err := token.CreateToken("1", "admin@gmail.com")
 	fmt.Println("Hello Mirabel")
 	if err != nil {
 		fmt.Println(err.Error())
