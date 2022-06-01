@@ -17,6 +17,14 @@ const (
 	AuthorizationPayloadKey = "authorizationPayload"
 )
 
+func GetAuthorizationPayload(ctx *gin.Context) (token.Payload, bool) {
+	payload, exist := ctx.Get(AuthorizationPayloadKey)
+	if exist == false {
+		return token.Payload{}, exist
+	}
+	return payload.(token.Payload), exist
+}
+
 // AuthMiddleware creates a gin middleware for authorization
 func AuthMiddleware(tokenMaker token.Maker) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
@@ -47,7 +55,7 @@ func AuthMiddleware(tokenMaker token.Maker) gin.HandlerFunc {
 			return
 		}
 
-		ctx.Set(AuthorizationPayloadKey, payload)
+		ctx.Set(AuthorizationPayloadKey, &payload)
 		ctx.Next()
 	}
 }
