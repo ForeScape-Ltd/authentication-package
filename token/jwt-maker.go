@@ -70,7 +70,7 @@ func (maker *JWTMaker) VerifyToken(token string) (*Payload, error) {
 	keyFunc := func(token *jwt.Token) (interface{}, error) {
 		_, ok := token.Method.(*jwt.SigningMethodHMAC)
 		if !ok {
-			return nil, ErrInvalidToken
+			return nil, errInvalidToken
 		}
 		return []byte(maker.tokenSecretKey), nil
 	}
@@ -78,15 +78,15 @@ func (maker *JWTMaker) VerifyToken(token string) (*Payload, error) {
 	jwtToken, err := jwt.ParseWithClaims(token, &Payload{}, keyFunc)
 	if err != nil {
 		verr, ok := err.(*jwt.ValidationError)
-		if ok && errors.Is(verr.Inner, ErrExpiredToken) {
-			return nil, ErrExpiredToken
+		if ok && errors.Is(verr.Inner, errExpiredToken) {
+			return nil, errExpiredToken
 		}
-		return nil, ErrInvalidToken
+		return nil, errInvalidToken
 	}
 
 	payload, ok := jwtToken.Claims.(*Payload)
 	if !ok {
-		return nil, ErrInvalidToken
+		return nil, errInvalidToken
 	}
 
 	return payload, nil
@@ -97,7 +97,7 @@ func (maker *JWTMaker) VerifyRefreshToken(token string) (*Payload, error) {
 	keyFunc := func(token *jwt.Token) (interface{}, error) {
 		_, ok := token.Method.(*jwt.SigningMethodHMAC)
 		if !ok {
-			return nil, ErrInvalidToken
+			return nil, errInvalidToken
 		}
 		return []byte(maker.refreshKokenSecretKey), nil
 	}
@@ -105,15 +105,15 @@ func (maker *JWTMaker) VerifyRefreshToken(token string) (*Payload, error) {
 	jwtToken, err := jwt.ParseWithClaims(token, &Payload{}, keyFunc)
 	if err != nil {
 		verr, ok := err.(*jwt.ValidationError)
-		if ok && errors.Is(verr.Inner, ErrExpiredToken) {
-			return nil, ErrExpiredToken
+		if ok && errors.Is(verr.Inner, errExpiredToken) {
+			return nil, errExpiredToken
 		}
-		return nil, ErrInvalidToken
+		return nil, errInvalidToken
 	}
 
 	payload, ok := jwtToken.Claims.(*Payload)
 	if !ok {
-		return nil, ErrInvalidToken
+		return nil, errInvalidToken
 	}
 
 	return payload, nil

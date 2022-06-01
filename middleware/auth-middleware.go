@@ -14,7 +14,7 @@ import (
 const (
 	authorizationHeaderKey  = "authorization"
 	authorizationTypeBearer = "bearer"
-	authorizationPayloadKey = "authorizationPayload"
+	AuthorizationPayloadKey = "authorizationPayload"
 )
 
 // AuthMiddleware creates a gin middleware for authorization
@@ -47,7 +47,7 @@ func AuthMiddleware(tokenMaker token.Maker) gin.HandlerFunc {
 			return
 		}
 
-		ctx.Set(authorizationPayloadKey, payload)
+		ctx.Set(AuthorizationPayloadKey, payload)
 		ctx.Next()
 	}
 }
